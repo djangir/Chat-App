@@ -1,0 +1,13 @@
+<h2>ALl Users</h2>
+
+<div class="container row text-center"> 
+<% @users.each do |user| %>
+  <h5 class="col-5">
+  <%= link_to user.name, home_url(user) %>
+  </h5>
+
+  <h5 class="col-5">
+  <%= link_to user.username, home_url(user) %>
+  </h5>
+<% end %>
+</div>

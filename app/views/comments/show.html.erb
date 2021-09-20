@@ -1,0 +1,13 @@
+<p>
+  <b>User:</b>
+  <%= @comment.user_id %>
+</p>
+
+<p>
+  <b>Text:</b>
+  <%= @comment.text %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_comment_path(@comment.project, @comment) %> |
+<%= link_to 'Back', project_comments_path(@comment.project) %>

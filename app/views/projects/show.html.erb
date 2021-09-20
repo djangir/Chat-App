@@ -1,0 +1,55 @@
+<%= link_to 'Back', projects_path, class:"btn btn-warning" %>
+
+<% if @project.user_id == current_user.id %>
+
+  <%= link_to "Rename #{@project.title}", edit_project_path(@project), class:"btn btn-warning"%> 
+<% end %>
+
+<h3 class="text-center"> <%= @project.title %> </h3>
+
+<div id="fetct">
+  <% @comments.each do |comment| %>
+    <% if comment.persisted? %>
+       
+      <div class="alert alert-secondary row w-100" role="alert">
+
+        <% if comment.user_id == current_user.id %>
+          <div class="col-md-2 m-auto">
+            <%= link_to 'Delete', [comment.project, comment], method: :delete, data: { confirm: 'Are you sure?' }, style:"display:block; text-align:right;" %>
+          </div>
+
+
+        <div class="col-md-10 my-auto text-end">
+        <%= link_to User.find(comment.user_id).username, home_url(comment.user_id) %> 
+        <br> 
+        <p class="text-end" style="word-break: break-word;">
+          <%= comment.text %>
+        </p>
+        </div>
+       
+        <% else %>
+        
+        <div class="col-md-11 my-auto">
+        <%= link_to User.find(comment.user_id).username, home_url(comment.user_id) %> 
+        <br> 
+        <p style="word-break: break-word;">
+          <%= comment.text %>
+        </p>
+        </div>
+
+        <% end %>
+
+      </div>
+
+    <% end %>
+  <% end %>
+</div>
+
+<br>
+<br> 
+<br> 
+<br> 
+
+<div style="position: fixed; bottom: 0; left: 0; right: 0; background: #000; color: #fff;">
+<%= render "comments/form" %>
+</div>

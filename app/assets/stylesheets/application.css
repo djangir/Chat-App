@@ -1,0 +1,72 @@
+/* Bootstrap CSS*/
+@import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+p, div , td{
+    text-align: justify;
+}
+ 
+h1, h2{
+    text-align: center;
+    color: red;
+    margin: 15px 0;
+}
+
+input, textarea{
+    width: 100%; 
+    margin: 1px 0 50px 0;
+    outline: none;
+    border:none;
+    border-bottom: 1px solid blue;
+    padding: 4px 8px;
+}
+
+input[type=button], input[type=submit]{
+    width: 100%; 
+    margin: 10px 0 25px 0;
+    outline: none;
+    border: 1px solid blue; 
+    padding: 8px;
+    border-radius: 500px;
+}
+
+input[type = checkbox]{
+    width: auto;  
+}
+
+table{
+    width: 100%;
+    text-align: center;
+}
+
+th, td{
+    text-align: center;
+    padding: 10px;
+}
+
+tr{
+    padding: 10px 0;
+    border: 2px solid #00000017;
+}
+
+img{
+    max-height: 250px;
+    max-width: 250px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+form{
+    padding: 30px;
+}
+
+.field_with_errors{
+    color: red;
+}
+
+.field_with_errors input{
+    border-bottom: 2px solid red;
+}

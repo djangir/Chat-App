@@ -1,0 +1,28 @@
+<%= form_with(model: [@comment.project, @comment], :html => { :style => 'padding:10px; margin:0; background: #000; color: #fff;' }) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+ <div style="display: grid;
+    grid-template-columns: auto 50px;
+     background: none;"> 
+     
+    <div class="text-center" style="margin:0; border-bottom: 1px solid white;"> 
+      <%= f.text_field :text, placeholder:"new", style:"margin:0 0 -10px 0; border:none; background: none; color: #fff;"%>
+    </div>
+    
+    <div style="margin:0 0 -10px 0;"> 
+      <%= button_tag(type: 'submit', style:"margin:0 0 -10px 0; border:none;  background:none;") do %>
+          <i class="material-icons" style="font-size:40px; color: #fff;">send</i>
+      <% end %> 
+    </div>
+  </div>
+<% end %>
