@@ -1,13 +1,16 @@
-<h2>ALl Users</h2>
+<div class="container row text-center m-auto"> 
+  <h2 class="col-6 m-auto">Full Name</h2>
+  <h2 class="col-6 m-auto">User Name</h2>
+</div>
+<br>
+<div class="container row text-center m-auto"> 
+  <% @users.each do |user| %>
+    <h5 class="col-6 m-auto">
+      <%= link_to user.name, home_url(user) %>
+    </h5>
 
-<div class="container row text-center"> 
-<% @users.each do |user| %>
-  <h5 class="col-5">
-  <%= link_to user.name, home_url(user) %>
-  </h5>
-
-  <h5 class="col-5">
-  <%= link_to user.username, home_url(user) %>
-  </h5>
-<% end %>
+    <h5 class="col-6 m-auto">
+      <%= link_to user.username, home_url(user) %>
+    </h5>
+  <% end %>
 </div>

@@ -1,8 +1,94 @@
-<h2> Details </h2>
+<% provide(:title, "Chat with User #{@user.name}") %> 
 
-<div class="px-2 container">
-	<h4>User Id :- <%= @user.id %> </h4>
-	<h4> Name :- <%= @user.name %> </h4>
-	<h4> User Name :- <%= @user.username %> </h4>
-	<h4> Email Id :- <%= @user.email %> </h4>
+<h2> Chat With <%= @user.name %> </h2>
+
+<div class="px-2 container"> 
+
+  <h4> User Name :- <%= @user.username %> </h4>
+  <h4> Email Id :- <%= @user.email %> </h4>
 </div>
+
+<br>
+<hr>
+<br>
+  
+<% @messagee.each do |aa| %>
+ 
+  <% if aa.user_id == current_user.id %>
+    <div class="text-end ps-1 pe-2 my-1 me-1 ms-4">
+ 		<b>
+     <%= link_to 'Delete Message', aa, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-danger" %>  
+    </b>
+    <br>
+    <b>  
+		  <%= time_ago_in_words(aa.created_at) %>
+    </b>
+ 		<p style="word-break: break-word; text-align: right; font-weight: bolder;">
+		  <%= aa.message %> 
+    </p>
+		
+	</div>
+  
+  <% else %>
+ 
+	<div class="pe-1 ps-2 my-1 ms-1 me-4">
+    <b>
+      <%= time_ago_in_words(aa.created_at) %>
+
+	  </b>
+    <p style="word-break: break-word; text-align: justify;">
+	   <%= aa.message %>
+    </p>
+	</div>
+  <% end %>
+<% end %>
+
+  <br> 
+  <br> 
+  <br> 
+  <br> 
+  <br> 
+
+ <!-- new data form -->
+
+
+<div style="position: fixed; bottom: 0; left: 0; right: 0; background: #000; color: #fff;">
+
+  <%= form_with(model: @msg, :html => { :style => 'padding:10px; margin:0; background: #000; color: #fff;' }) do |form| %>
+    <% if @msg.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(msg.errors.count, "error") %> prohibited this msg from being saved:</h2>
+
+        <ul>
+          <% msg.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+   <div style="display: grid;
+      grid-template-columns: auto 50px;
+       background: none;"> 
+
+
+	  <div class="text-center" style="margin:0; border-bottom: 1px solid white;"> 
+        <%= form.text_field :message, placeholder:"new message", style:"margin:0 0 -10px 0; border:none; background: none; color: #fff;"%>
+	  </div>
+ 
+	  <%= form.hidden_field :user_id, value: current_user.id %>
+
+        <%= form.hidden_field :u_id, value: @user.id %>
+ 
+      <div style="margin:0 0 -10px 0;"> 
+        <%= button_tag(type: 'submit', style:"margin:0 0 -10px 0; border:none;  background:none;") do %>
+            <i class="material-icons" style="font-size:40px; color: #fff;">send</i>
+        <% end %> 
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+  <% session[:url] = request.url %>

@@ -2,7 +2,7 @@
   <div class="container-fluid">
     
     <%= link_to root_path, class:"navbar-brand m-auto" do%> 
-      <h3 class="h2">Navbar</h3>
+      <h3 class="h2"> Chat App </h3>
     <% end %>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav m-auto lead">
-    
+        <li class="nav-item">
+          <%= link_to "All Messages", msgs_path, class:"nav-link active" %>
+        </li> 
+        <li class="nav-item">
+          <%= link_to "projects", projects_path, class:"nav-link active" %>
+        </li>
+
         <% if user_signed_in? %>
         
           <li class="nav-item">
@@ -30,3 +36,4 @@
     </div>
   </div>
 </nav>
+  
