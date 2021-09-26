@@ -9,27 +9,49 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav m-auto lead">
+      <ul class="navbar-nav my-auto ms-auto lead">
         <li class="nav-item">
-          <%= link_to "All Messages", msgs_path, class:"nav-link active" %>
+          <%= link_to msgs_path, class:"nav-link active" do %>
+            <i class="material-icons" style="font-size:40px; color: green;">
+              message
+            </i>
+          <% end %>
         </li> 
         <li class="nav-item">
-          <%= link_to "projects", projects_path, class:"nav-link active" %>
+          <%= link_to projects_path, class:"nav-link active" do %>
+            <i class="material-icons" style="font-size:40px; color: blue;">
+              group
+            </i>
+          <% end %>
         </li>
+      </ul>
 
+      <ul class="navbar-nav my-auto ms-auto lead">
         <% if user_signed_in? %>
         
           <li class="nav-item">
-            <%= link_to current_user.name, edit_user_registration_path, class:"nav-link active" %>
+            <%= link_to edit_user_registration_path, class:"nav-link active" do%>
+              <i class="material-icons" style="font-size:40px; color: blue;">
+              manage_accounts
+              </i>
+            <% end %>
           </li>
 
           <li class="nav-item">
-            <%= link_to "Log out", destroy_user_session_path, method: :delete ,class:"nav-link active" %>
+            <%= link_to destroy_user_session_path, method: :delete ,class:"nav-link active" do %>
+              <i class="material-icons" style="font-size:40px; color: red;">
+                logout
+              </i>
+            <% end %>
           </li>
         <% else %>
 
           <li class="nav-item">
-            <%= link_to "Log in", new_user_session_path ,class:"nav-link active" %>
+            <%= link_to new_user_session_path ,class:"nav-link active" do %>
+              <i class="material-icons" style="font-size:40px; color: red;">
+                login
+              </i>
+            <% end %>
           </li>
         <% end %>
       </ul> 

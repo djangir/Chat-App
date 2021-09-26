@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
     @comment = @project.comments.build(comment_params)
 
     if @comment.save
-      redirect_to @project , notice: 'created.'
+      redirect_to @project
     else
       render action: 'new'
     end

@@ -6,9 +6,10 @@ class HomeController < ApplicationController
   end
 
   def show
+    index
     @user = User.find(params[:id])
     @msg = Msg.new
     @messagee = Msg.where(u_id: current_user.id, user_id: @user.id) + Msg.where(u_id: @user.id, user_id: current_user.id)
-    @messagee = @messagee.sort_by(&:created_at)
+    @messagee = @messagee.sort_by(&:created_at).reverse!
   end
 end

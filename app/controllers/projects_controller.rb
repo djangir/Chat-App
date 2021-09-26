@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.all.order("created_at DESC")
     @project = current_user.projects.build
   end
 
@@ -31,8 +31,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to root_path, notice: "Project was successfully created." }
-        format.js
+        format.html { redirect_to projects_path }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new, status: :unprocessable_entity }

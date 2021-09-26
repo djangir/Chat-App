@@ -70,3 +70,57 @@ form{
 .field_with_errors input{
     border-bottom: 2px solid red;
 }
+
+
+
+
+
+.p_tag{
+    word-break: break-word; 
+    text-align: justify;  
+    float: right;
+}
+
+/*form css*/
+
+.main_form_div{
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    background: #000; 
+    color: #fff;
+}
+
+
+.formm{
+    padding:10px; 
+    margin:0; 
+    background: #000; 
+    color: #fff;
+}
+
+
+.input_div{
+    display: grid;
+    grid-template-columns: auto 50px;
+    background: none;
+}
+
+.input_div1{
+    margin:0; 
+    border-bottom: 1px solid white;
+}
+
+.input_t{
+    margin:0 0 -10px 0; 
+    border:none; 
+    background: none; 
+    color: #fff;
+}
+
+.input_b{
+    margin:0 0 -10px 0; 
+    border:none;
+    background:none;
+}

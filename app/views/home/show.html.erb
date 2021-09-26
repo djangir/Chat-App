@@ -1,94 +1,117 @@
-<% provide(:title, "Chat with User #{@user.name}") %> 
+<div class="row w-100 m-0"> 
+    <h2 class="col-sm-3 bg-light m-0 py-2">  </h2>
 
-<h2> Chat With <%= @user.name %> </h2>
-
-<div class="px-2 container"> 
-
-  <h4> User Name :- <%= @user.username %> </h4>
-  <h4> Email Id :- <%= @user.email %> </h4>
+    <h2 class="col-sm-9 bg-light mt-0 mb-5 py-2"> <%= @user.name %> </h2>
 </div>
 
-<br>
-<hr>
-<br>
-  
-<% @messagee.each do |aa| %>
- 
-  <% if aa.user_id == current_user.id %>
-    <div class="text-end ps-1 pe-2 my-1 me-1 ms-4">
- 		<b>
-     <%= link_to 'Delete Message', aa, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-danger" %>  
-    </b>
+<div class="row w-100">
+  <div class="col-sm-3 d-none d-sm-block bg-light" style="position: sticky; top: 0px; left: 0px ; overflow-y:auto; height: 90vh">
+
+    <div class="container row text-center m-auto"> 
+      <h3 class="my-2"> Users </h3>
+      <hr>
+
+      <% @users.each do |user| %>
+       <% if user.id == current_user.id %>
+       <% next %>
+       <% end %>
+
+        <h5 class="mx-auto my-2">
+          <%= link_to home_url(user) do %>     
+            <i class="material-icons m-auto" style="color: green; font-size:20px;">
+                  message
+            </i>
+            <%= user.username %>
+          <% end %> 
+        </h5> 
+      <% end %>
+    </div>
     <br>
-    <b>  
-		  <%= time_ago_in_words(aa.created_at) %>
-    </b>
- 		<p style="word-break: break-word; text-align: right; font-weight: bolder;">
-		  <%= aa.message %> 
-    </p>
-		
-	</div>
-  
-  <% else %>
- 
-	<div class="pe-1 ps-2 my-1 ms-1 me-4">
-    <b>
-      <%= time_ago_in_words(aa.created_at) %>
+    <br>
+  </div>
 
-	  </b>
-    <p style="word-break: break-word; text-align: justify;">
-	   <%= aa.message %>
-    </p>
-	</div>
-  <% end %>
-<% end %>
+  <div class="col-sm-9 ps-sm-4">
+    <% @messagee.each do |aa| %>
+     
+      <% if aa.user_id == current_user.id %>
+        <div class="text-end ps-1 pe-2 my-1 me-1 ms-5">
+     		<b>
+         <%= link_to aa, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-danger" do %> 
+            <i class="material-icons" style="font-size:30px; color: red;">
+                  delete
+            </i> 
+         <% end %>
+        </b>
+        <b>  
+    		  <%= time_ago_in_words(aa.created_at) %> Ago
+        </b>
+        <br>
+     		<p class="p_tag">
+    		  <%= aa.message %> 
+        </p>
+     		<span style="clear: both; display: block;"></span>
+    	</div>
+      
+      <% else %>
+     
+    	<div class="pe-1 ps-2 my-1 ms-1 me-5">
+        <b>
+          <%= time_ago_in_words(aa.created_at) %> Ago
 
-  <br> 
-  <br> 
-  <br> 
-  <br> 
-  <br> 
-
- <!-- new data form -->
-
-
-<div style="position: fixed; bottom: 0; left: 0; right: 0; background: #000; color: #fff;">
-
-  <%= form_with(model: @msg, :html => { :style => 'padding:10px; margin:0; background: #000; color: #fff;' }) do |form| %>
-    <% if @msg.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(msg.errors.count, "error") %> prohibited this msg from being saved:</h2>
-
-        <ul>
-          <% msg.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
+    	  </b>
+        <p style="word-break: break-word; text-align: justify;">
+    	   <%= aa.message %>
+        </p>
+    	</div>
+      <% end %>
     <% end %>
 
-   <div style="display: grid;
-      grid-template-columns: auto 50px;
-       background: none;"> 
+      <br> 
+      <br> 
+      <br> 
+      <br> 
+      <br> 
+
+     <!-- new data form -->
 
 
-	  <div class="text-center" style="margin:0; border-bottom: 1px solid white;"> 
-        <%= form.text_field :message, placeholder:"new message", style:"margin:0 0 -10px 0; border:none; background: none; color: #fff;"%>
-	  </div>
- 
-	  <%= form.hidden_field :user_id, value: current_user.id %>
+    <div class="main_form_div">
 
-        <%= form.hidden_field :u_id, value: @user.id %>
- 
-      <div style="margin:0 0 -10px 0;"> 
-        <%= button_tag(type: 'submit', style:"margin:0 0 -10px 0; border:none;  background:none;") do %>
-            <i class="material-icons" style="font-size:40px; color: #fff;">send</i>
-        <% end %> 
-      </div>
+      <%= form_with(model: @msg, class:"formm", local: false) do |form| %>
+        <% if @msg.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(msg.errors.count, "error") %> prohibited this msg from being saved:</h2>
+
+            <ul>
+              <% msg.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+       <div class="input_div"> 
+
+    	  <div class="text-center input_div1">
+            <%= form.text_field :message, placeholder:"new message", class:"input_t"%>
+    	  </div>
+     
+          <div style="margin:0 0 -10px 0;"> 
+            <%= button_tag(type: 'submit', class:"input_b") do %>
+                <i class="material-icons" style="font-size:40px; color: #fff;">send</i>
+            <% end %> 
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
 
-
-
+<!-- other -->
+  <% provide(:title, "Chat with User #{@user.name}") %>
   <% session[:url] = request.url %>
+  <% session[:rsid] = @user.id %>
+  
+
+
+ 

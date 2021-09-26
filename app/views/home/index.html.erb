@@ -1,16 +1,22 @@
-<div class="container row text-center m-auto"> 
-  <h2 class="col-6 m-auto">Full Name</h2>
-  <h2 class="col-6 m-auto">User Name</h2>
-</div>
-<br>
+<h2>Select User</h2>
 <div class="container row text-center m-auto"> 
   <% @users.each do |user| %>
-    <h5 class="col-6 m-auto">
-      <%= link_to user.name, home_url(user) %>
-    </h5>
+   <% if user.id == current_user.id %>
+   <% next %>
+   <% end %>
 
-    <h5 class="col-6 m-auto">
-      <%= link_to user.username, home_url(user) %>
-    </h5>
+    <div class="mx-auto my-2 text-center row">
+        <%= link_to home_url(user) do %>     
+          <span class="h4">
+          <%= user.username %>
+          </span> 
+          <%= " : #{Msg.where(u_id: current_user.id, user_id: user.id).length}" %>
+          <i class="material-icons m-auto" style="color: green; font-size: 15px;">
+                message
+          </i>
+        <% end %> 
+    </div>
   <% end %>
 </div>
+ 
+            
