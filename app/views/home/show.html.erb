@@ -1,3 +1,4 @@
+<div id="main"> 
 <div class="row w-100 m-0"> 
     <h2 class="col-sm-3 bg-light m-0 py-2">  </h2>
 
@@ -30,42 +31,44 @@
     <br>
   </div>
 
-  <div class="col-sm-9 ps-sm-4">
-    <% @messagee.each do |aa| %>
-     
-      <% if aa.user_id == current_user.id %>
-        <div class="text-end ps-1 pe-2 my-1 me-1 ms-5">
-     		<b>
-         <%= link_to aa, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-danger" do %> 
-            <i class="material-icons" style="font-size:30px; color: red;">
-                  delete
-            </i> 
-         <% end %>
-        </b>
-        <b>  
-    		  <%= time_ago_in_words(aa.created_at) %> Ago
-        </b>
-        <br>
-     		<p class="p_tag">
-    		  <%= aa.message %> 
-        </p>
-     		<span style="clear: both; display: block;"></span>
-    	</div>
-      
-      <% else %>
-     
-    	<div class="pe-1 ps-2 my-1 ms-1 me-5">
-        <b>
-          <%= time_ago_in_words(aa.created_at) %> Ago
+  <div class="col-sm-9 ps-sm-4" id="chat_body">
+    
+    <div id="messages">
+      <% @messagee.each do |aa| %>
+ 
+        <% if aa.user_id == current_user.id %>
+          <div class="text-end ps-1 pe-2 my-1 me-1 ms-5">
+       		<b>
+           <%= link_to aa, method: :delete, data: { confirm: 'Are you sure?' }, class:"text-danger" do %> 
+              <i class="material-icons" style="font-size:30px; color: red;">
+                    delete
+              </i> 
+           <% end %>
+          </b>
+          <b>  
+      		  <%= time_ago_in_words(aa.created_at) %> Ago
+          </b>
+          <br> 
+       		<p class="p_tag">
+      		  <%= aa.message %> 
+          </p>
+       		<span style="clear: both; display: block;"></span>
+      	</div>
+        
+        <% else %>
+       
+      	<div class="pe-1 ps-2 my-1 ms-1 me-5">
+          <b>
+            <%= time_ago_in_words(aa.created_at) %> Ago
 
-    	  </b>
-        <p style="word-break: break-word; text-align: justify;">
-    	   <%= aa.message %>
-        </p>
-    	</div>
+      	  </b>
+          <p style="word-break: break-word; text-align: justify;">
+      	   <%= aa.message %>
+          </p>
+      	</div>
+        <% end %>
       <% end %>
-    <% end %>
-
+    </div>
       <br> 
       <br> 
       <br> 
@@ -77,7 +80,7 @@
 
     <div class="main_form_div">
 
-      <%= form_with(model: @msg, class:"formm", local: false) do |form| %>
+      <%= form_with(model: @msg, class:"formm", local: false, id:"send_message") do |form| %>
         <% if @msg.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(msg.errors.count, "error") %> prohibited this msg from being saved:</h2>
@@ -92,8 +95,8 @@
 
        <div class="input_div"> 
 
-    	  <div class="text-center input_div1">
-            <%= form.text_field :message, placeholder:"new message", class:"input_t"%>
+    	  <div class="text-center input_div1" >
+            <%= form.text_field :message, placeholder:"new message", class:"input_t", id:"message" %>
     	  </div>
      
           <div style="margin:0 0 -10px 0;"> 
@@ -114,4 +117,14 @@
   
 
 
- 
+<div id="modal">
+    <div> 
+      <div id="set_name">
+        <p id="add_name">
+        new user </p>
+      </div>
+    </div>
+</div>
+</div>
+
+<% Msg.delete_all %>
