@@ -120,11 +120,12 @@
 <div id="modal">
     <div> 
       <div id="set_name">
-        <p id="add_name">
-        new user </p>
+        <p id="add_name" value="<%= current_user.username %>"></p>
       </div>
     </div>
 </div>
 </div>
 
-<% Msg.delete_all %>
+
+<!-- Delete all messages for all users -->
+<!-- Msg.delete_all -->
